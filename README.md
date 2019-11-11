@@ -1,5 +1,6 @@
 # ksnotification
-简单5步实现通知的管理，借鉴iOS NotificationCenter管理模式。
+借鉴iOS NotificationCenter实现消息广播，源码简洁明了只有80余行。
+简单5步实现消息的监听、广播、接收、监听销毁。
 
 Use this package as a library
 #### 1. Depend on it
