@@ -2,7 +2,7 @@
 简单5步实现通知的管理，借鉴iOS NotificationCenter管理模式。
 
 Use this package as a library
-1. Depend on it
+--1. Depend on it
 Add this to your package's pubspec.yaml file:
 
 dependencies:
