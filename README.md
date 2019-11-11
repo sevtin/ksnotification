@@ -1,5 +1,5 @@
 # ksnotification
-ksnotification
+简单5步实现通知的管理，借鉴iOS NotificationCenter管理模式。
 
 	/*1、接口实现*/
 	class _MyHomePageState extends State<MyHomePage> implements KSObserver {
