@@ -32,7 +32,7 @@ ksnotification
 	  }
 	
 	  void _incrementCounter() {
-	    /*4、发送通知广播*/
+	    /*3、发送通知广播*/
 	    KSNotificationCenter.shard().post({'num':100}, increment_counter);
 	  }
 	
