@@ -1,6 +1,7 @@
 # ksnotification
-借鉴iOS NotificationCenter实现消息广播，源码简洁明了只有80余行。
-简单5步实现消息的监听、广播、接收、监听销毁。
+#### 1、借鉴iOS NotificationCenter实现消息广播，源码简洁明了只有80余行。
+#### 2、简单5步实现消息的监听、广播、接收、监听销毁。
+#### 3、除了简单易用还是简单易用
 
 Use this package as a library
 #### 1. Depend on it
