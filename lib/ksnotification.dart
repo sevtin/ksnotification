@@ -41,7 +41,7 @@ class KSNotificationCenter {
   }
 
   /*发送广播通知*/
-  post(Map message, String name) {
+  post(dynamic message, String name) {
     if (_notify.containsKey(name)) {
       for (KSObserver observer in _notify[name]) {
         observer.receiveNotify(message, name);
@@ -79,5 +79,5 @@ class KSNotificationCenter {
 
 /*观察者接口*/
 abstract class KSObserver {
-  receiveNotify(Map message, String name);
+  receiveNotify(dynamic message, String name);
 }
