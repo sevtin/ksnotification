@@ -9,7 +9,7 @@ Use this package as a library
 Add this to your package's pubspec.yaml file:
 
 dependencies:
-  ksnotification: ^0.0.4
+  ksnotification: ^0.1.0+1
 
 #### 2. Install it
 You can install packages from the command line:

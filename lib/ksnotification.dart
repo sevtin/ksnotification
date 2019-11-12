@@ -3,8 +3,7 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 
 class Ksnotification {
-  static const MethodChannel _channel =
-      const MethodChannel('ksnotification');
+  static const MethodChannel _channel = const MethodChannel('ksnotification');
 
   static Future<String> get platformVersion async {
     final String version = await _channel.invokeMethod('getPlatformVersion');
