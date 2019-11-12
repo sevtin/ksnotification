@@ -1,3 +1,5 @@
+
+```
 /*1、接口实现*/
 class _MyHomePageState extends State<MyHomePage> implements KSObserver {
   int _counter = 0;
@@ -67,3 +69,6 @@ class KSMessage {
 
   KSMessage({this.num});
 }
+
+
+```
