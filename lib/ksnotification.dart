@@ -62,11 +62,7 @@ class KSNotificationCenter {
   /*移除观察者的所有监听*/
   remove(KSObserver observer) {
     _notify.forEach((String key, List<KSObserver> value) {
-      for (KSObserver _observer in value) {
-        if (_observer == observer) {
-          value.remove(observer);
-        }
-      }
+      value.removeWhere((_observer) => _observer == observer);
     });
   }
 
