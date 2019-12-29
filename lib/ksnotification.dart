@@ -11,7 +11,7 @@ class Ksnotification {
   }
 }
 
-typedef KSCallback = void Function(dynamic message, String name);
+typedef KSCallback = void Function(dynamic message);
 
 class KSNotificationCenter {
   KSNotificationCenter._();
@@ -28,7 +28,7 @@ class KSNotificationCenter {
   }
 
   /*添加监听回调*/
-  addListener(KSCallback callback, String name) {
+  addListener(String name, KSCallback callback) {
     if (_notify.containsKey(name)) {
       List callbacks = _notify[name];
       bool result = callbacks.contains(callback);
@@ -45,7 +45,7 @@ class KSNotificationCenter {
   post(dynamic message, String name) {
     if (_notify.containsKey(name)) {
       for (KSCallback callback in _notify[name]) {
-        callback(message, name);
+        callback(message);
       }
     }
   }
