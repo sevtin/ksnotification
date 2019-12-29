@@ -48,7 +48,8 @@ class _KSPackagesManagerPageState extends State<KSPackagesManagerPage> {
   @override
   void dispose() {
     /*4、移除监听*/
-    KSNotificationCenter.shard().removeListener(_kPriceChange, _priceChangeCallback);
+    KSNotificationCenter.shard()
+        .removeListener(_kPriceChange, _priceChangeCallback);
     super.dispose();
   }
 
@@ -64,13 +65,12 @@ class _KSPackagesManagerPageState extends State<KSPackagesManagerPage> {
               title: '价格修改为（${iphone_price}）',
               onTap: () {
                 /*3、发送消息*/
-                KSNotificationCenter.shard().post(iphone_price, _kPriceChange);
+                KSNotificationCenter.shard().post(_kPriceChange, iphone_price);
               }),
         ],
       ),
     );
   }
 }
-
 
 ```

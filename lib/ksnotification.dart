@@ -42,7 +42,7 @@ class KSNotificationCenter {
   }
 
   /*发送广播*/
-  post(dynamic message, String name) {
+  post(String name, dynamic message) {
     if (_notify.containsKey(name)) {
       for (KSCallback callback in _notify[name]) {
         callback(message);
