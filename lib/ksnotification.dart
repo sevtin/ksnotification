@@ -11,68 +11,65 @@ class Ksnotification {
   }
 }
 
+typedef KSCallback = void Function(dynamic message, String name);
+
 class KSNotificationCenter {
   KSNotificationCenter._();
 
   static KSNotificationCenter _instance;
-  Map<String, List<KSObserver>> _notify;
+  Map<String, List<KSCallback>> _notify;
 
   static KSNotificationCenter shard() {
     if (_instance == null) {
       _instance = KSNotificationCenter._();
-      _instance._notify = Map<String, List<KSObserver>>();
+      _instance._notify = Map<String, List<KSCallback>>();
     }
     return _instance;
   }
 
-  /*添加监听*/
-  addObserver(KSObserver observer, String name) {
+  /*添加监听回调*/
+  addListener(KSCallback callback, String name) {
     if (_notify.containsKey(name)) {
-      List observers = _notify[name];
-      bool result = observers.contains(observer);
+      List callbacks = _notify[name];
+      bool result = callbacks.contains(callback);
       if (result == false) {
-        observers.add(observer);
+        callbacks.add(callback);
       }
     } else {
-      _notify[name] = List<KSObserver>();
-      _notify[name].add(observer);
+      _notify[name] = List<KSCallback>();
+      _notify[name].add(callback);
     }
   }
 
-  /*发送广播通知*/
+  /*发送广播*/
   post(dynamic message, String name) {
     if (_notify.containsKey(name)) {
-      for (KSObserver observer in _notify[name]) {
-        observer.receiveNotify(message, name);
+      for (KSCallback callback in _notify[name]) {
+        callback(message, name);
       }
     }
   }
 
-  /*移除观察者的指定监听*/
-  removeObserver(Object observer, String name) {
+  /*移除观察者的指定监听回调*/
+  removeListener(KSCallback callback, String name) {
     if (_notify.containsKey(name)) {
-      List observers = _notify[name];
-      bool result = observers.contains(observer);
+      List callbacks = _notify[name];
+      bool result = callbacks.contains(callback);
       if (result) {
-        observers.remove(observer);
+        callbacks.remove(callback);
       }
     }
   }
 
-  /*移除观察者的所有监听*/
-  remove(KSObserver observer) {
-    _notify.forEach((String key, List<KSObserver> value) {
-      value.removeWhere((_observer) => _observer == observer);
+  /*移除观察者的所有监听回调*/
+  remove(KSCallback callback) {
+    _notify.forEach((String key, List<KSCallback> value) {
+      value.removeWhere((_callback) => _callback == callback);
     });
   }
 
-  /*删除所有监听*/
+  /*删除所有监听回调*/
   removeAll() {
     _notify.clear();
   }
-}
-
-/*观察者接口*/
-abstract class KSObserver {
-  receiveNotify(dynamic message, String name);
 }
