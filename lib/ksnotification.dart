@@ -51,7 +51,7 @@ class KSNotificationCenter {
   }
 
   /*移除观察者的指定监听回调*/
-  removeListener(KSCallback callback, String name) {
+  removeListener(String name, KSCallback callback) {
     if (_notify.containsKey(name)) {
       List callbacks = _notify[name];
       bool result = callbacks.contains(callback);

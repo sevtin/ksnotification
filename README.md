@@ -1,6 +1,6 @@
 # ksnotification
 #### 1、借鉴iOS NotificationCenter实现消息广播，源码简洁明了只有80余行。
-#### 2、简单5步实现消息的监听、广播、接收、监听销毁。
+#### 2、简单4步实现消息的监听、广播、接收、销毁。
 #### 3、除了简单易用还是简单易用
 
 
@@ -25,74 +25,51 @@ Now in your Dart code, you can use:
 
 
 ```
-/*1、接口实现*/
-class _MyHomePageState extends State<MyHomePage> implements KSObserver {
-  int _counter = 0;
-  static const String increment_counter = 'increment_counter';
+const String _kPriceChange = 'kPriceChange';
+
+class _KSPackagesManagerPageState extends State<KSPackagesManagerPage> {
+  String _price = '';
 
   @override
   void initState() {
     super.initState();
-    /*2、添加监听*/
-    KSNotificationCenter.shard().addObserver(this, increment_counter);
+    /*1、添加监听*/
+    KSNotificationCenter.shard()
+        .addListener(_kPriceChange, _priceChangeCallback);
+  }
+
+  /*2、监听回调*/
+  void _priceChangeCallback(dynamic price) {
+    setState(() {
+      _price = price;
+    });
   }
 
   @override
   void dispose() {
-    /*5、移除监听*/
-    KSNotificationCenter.shard().removeObserver(this, increment_counter);
+    /*4、移除监听*/
+    KSNotificationCenter.shard().removeListener(_kPriceChange, _priceChangeCallback);
     super.dispose();
-  }
-
-  /*4、接收监听消息*/
-  @override
-  receiveNotify(message, String name) {
-    if (name == increment_counter) {
-      var msg = message as KSMessage;
-      setState(() {
-        _counter += msg.num;
-      });
-    }
-  }
-
-  void _incrementCounter() {
-    /*3、发送通知广播*/
-    KSNotificationCenter.shard().post(KSMessage(num: 100), increment_counter);
   }
 
   @override
   Widget build(BuildContext context) {
+    String iphone_price = '3889元';
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
+      appBar: KSAppBar.ks_init(title: widget.pageTitle),
+      body: ListView(
+        children: <Widget>[
+          KSListTile.ks_init(title: _price, onTap: null),
+          KSListTile.ks_init(
+              title: '价格修改为（${iphone_price}）',
+              onTap: () {
+                /*3、发送消息*/
+                KSNotificationCenter.shard().post(iphone_price, _kPriceChange);
+              }),
+        ],
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
-}
-
-class KSMessage {
-  int num;
-
-  KSMessage({this.num});
 }
 
 
